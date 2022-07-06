@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Current Humidity
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isLoading" class="ion-text-center ion-margin-top">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-grid *ngIf="!isLoading">
+    <ion-row>
+      <ion-col *ngIf="cityInformation" class="ion-text-center">
+        <h4>{{ cityInformation?.location.name }}</h4>
+        <h4>Current Humidity: {{ cityInformation?.current.humidity }} %</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="!cityInformation">
+        <h4 class="ion-text-center">Please first search for a city on the home page</h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

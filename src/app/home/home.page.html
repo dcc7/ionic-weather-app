@@ -1,20 +1,67 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Blank
+      Weather App
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-item>
+    <ion-label position="floating">City Name</ion-label>
+    <ion-input [(ngModel)]="inputValue" type="text"></ion-input>
+  </ion-item>
+ 
+  <ion-button class="ion-margin-top" color="primary" (click)="getWeather()">Get Current Temperature</ion-button>
+
+  <ion-text color="danger">
+    <p #errorMessage></p>
+  </ion-text>
+ 
+  <ion-grid *ngIf="weatherData">
+    <ion-row>
+      <ion-col>
+        <h2>{{ weatherData.location.name }}</h2>
+      </ion-col>
+      <ion-col>
+        <h6>Current Temperature: {{ weatherData.current.temp_c }} <span>&#8451;</span></h6>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-button color="secondary" (click)="addToList()">Add to List</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h2>Saved Places</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="places">
+      <ion-col>
+        <ion-list>
+          <ion-item-sliding *ngFor="let place of places" #slidingItem>
+            <ion-item>
+              <ion-label>
+                <h4>{{ place.location.name }}: {{ place.current.temp_c }}<span>&#8451;</span></h4>
+              </ion-label>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option color="danger" (click)="deletePlace(place.location.name, slidingItem)">
+                <ion-icon slot="start" name="archive"></ion-icon>
+                Delete
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

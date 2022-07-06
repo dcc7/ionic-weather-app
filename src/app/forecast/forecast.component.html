@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      3-Day Forecast <span *ngIf="cityName">({{ cityName }})</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-margin-top ion-text-center">
+    <ion-spinner *ngIf="isLoading"></ion-spinner>
+  </div>
+  <ion-grid *ngIf="!isLoading">
+    <ion-row *ngIf="cityInformationArray">
+      <ion-col *ngFor="let forecast of cityInformationArray" class="ion-text-center">
+        <h4>{{ forecast.date | date }}</h4>
+        <h4>{{ forecast.day.maxtemp_c }} <span>&#8451;</span></h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="!cityInformationArray">
+        <h4 class="ion-text-center">Please first search for a city on the home page</h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

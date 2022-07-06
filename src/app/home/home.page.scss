@@ -25,3 +25,9 @@
 #container a {
   text-decoration: none;
 }
+
+@media only screen and (min-width: 768px) {
+  ion-content {
+    width: 50vw;
+  }
+}
