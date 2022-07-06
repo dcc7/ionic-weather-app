@@ -60,8 +60,8 @@ export class HomePage {
 
   ionViewWillLeave(){
     if (this.weatherSub$){
-      console.log('home unsubscribed');
       this.weatherSub$.unsubscribe();
+      };
     }
-  }
+
 }

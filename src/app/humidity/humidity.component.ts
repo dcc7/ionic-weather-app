@@ -31,7 +31,6 @@ export class HumidityComponent implements OnInit {
 
   ionViewWillLeave(){
     if (this.weatherSub$){
-      console.log('humidity unsubscribed');
       this.weatherSub$.unsubscribe();
     }
   }

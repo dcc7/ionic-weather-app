@@ -33,7 +33,6 @@ export class ForecastComponent implements OnInit {
 
   ionViewWillLeave(){
     if (this.weatherSub$){
-      console.log('forecast unsubscribed');
        this.weatherSub$.unsubscribe();
     }
   }
